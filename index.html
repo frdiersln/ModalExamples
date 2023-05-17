@@ -8,7 +8,9 @@
 </head>
 <body>
     
-    <dialog>
+    <button data-open-modal> Open </button>
+
+    <dialog data-modal>
         <form>
           <input type="text" />
           <button formmethod="dialog" type="submit">Cancel</button>
@@ -16,6 +18,32 @@
         </form>
       </dialog>
 
-      
+
 </body>
 </html>
+
+<script>
+
+    const openBtn = document.querySelector("[data-open-modal]")
+    const closeBtn = document.querySelector("[data-close-modal]")
+    const modal = document.querySelector("[data-modal]")
+
+    openBtn.addEventListener("click", () => {
+        modal.showModal()
+    })
+
+
+    //Close On Outside Click
+    modal.addEventListener("click", e => {
+    const modalDimensions = modal.getBoundingClientRect()
+    if (
+        e.clientX < modalDimensions.left ||
+        e.clientX > modalDimensions.right ||
+        e.clientY < modalDimensions.top ||
+        e.clientY > modalDimensions.bottom
+    ) {
+        modal.close()
+    }
+    })
+
+</script>
